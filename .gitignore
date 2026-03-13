@@ -1,0 +1,13 @@
+__pycache__/
+.venv/
+.env
+
+# Neo4j export/session files
+Neo4j-*.txt
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
