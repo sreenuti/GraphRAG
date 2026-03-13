@@ -45,7 +45,7 @@ kg = Neo4jGraph(
 ) #database=NEO4J_DATABASE,
 
 # # # read the wikipedia page for the Roman Empire
-# raw_documents = WikipediaLoader(query="The Roman empire").load()
+# raw_documents = WikipediaLoader(query="History of India").load()
 # # print(raw_documents)
 
 # # # # # # Define chunking strategy
@@ -63,28 +63,28 @@ kg = Neo4jGraph(
 #     baseEntityLabel=True,
 # )
 
-# MATCH (n) DETACH DELETE n - use this cyper command to delete the Graphs present in neo4j
+# # MATCH (n) DETACH DELETE n - use this cyper command to delete the Graphs present in neo4j
 
-# Hybrid Retrieval for RAG
-# create vector index
-vector_index = Neo4jVector.from_existing_graph(
-    OpenAIEmbeddings(),
-    search_type="hybrid",
-    node_label="Document",
-    text_node_properties=["text"],
-    embedding_node_property="embedding",
-)
+# # Hybrid Retrieval for RAG
+# # create vector index
+# vector_index = Neo4jVector.from_existing_graph(
+#     OpenAIEmbeddings(),
+#     search_type="hybrid",
+#     node_label="Document",
+#     text_node_properties=["text"],
+#     embedding_node_property="embedding",
+# )
 
 
-# Extract entities from text
-class Entities(BaseModel):
-    """Identifying information about entities."""
+# # Extract entities from text
+# class Entities(BaseModel):
+#     """Identifying information about entities."""
 
-    names: List[str] = Field(
-        ...,
-        description="All the person, organization, or business entities that "
-        "appear in the text",
-    )
+#     names: List[str] = Field(
+#         ...,
+#         description="All the person, organization, or business entities that "
+#         "appear in the text",
+#     )
 
 
 prompt = ChatPromptTemplate.from_messages(
@@ -102,14 +102,14 @@ prompt = ChatPromptTemplate.from_messages(
 )
 entity_chain = prompt | chat.with_structured_output(Entities)
 
-# Test it out:
-res = entity_chain.invoke(
-    {"question": "In the year of 123 there was an emperor who did not like to rule"}
-).names
-print(res)
+# # Test it out:
+# res = entity_chain.invoke(
+#     {"question": "In the year of 123 there was an emperor who did not like to rule"}
+# ).names
+# print(res)
 
-# # Who is Ceaser?
-# # In the year of 123 there was an emperor who did not like to rule. 
+# # # Who is Ceaser?
+# # # In the year of 123 there was an emperor who did not like to rule. 
 
 # Retriever
 kg.query("CREATE FULLTEXT INDEX entity IF NOT EXISTS FOR (e:__Entity__) ON EACH [e.id]")

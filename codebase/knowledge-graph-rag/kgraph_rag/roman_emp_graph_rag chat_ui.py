@@ -266,7 +266,7 @@ def get_suggested_followups(question: str, answer: str) -> List[str]:
     """
     try:
         suggestions_prompt = ChatPromptTemplate.from_template(
-            "You are helping a user explore the Roman Empire.\n"
+            "You are helping a user explore the History of India.\n"
             "Given the last question and answer, suggest 3 concise follow-up questions "
             "the user might reasonably ask next.\n\n"
             "Last question: {question}\n"
@@ -297,10 +297,10 @@ def main() -> None:
     Run with:
         streamlit run "roman_emp_graph_rag chat_ui.py"
     """
-    st.set_page_config(page_title="Roman Empire GraphRAG Chat", page_icon="🏛️")
-    st.title("Roman Empire GraphRAG Chatbot")
+    st.set_page_config(page_title="History of India GraphRAG Chat", page_icon="🏛️")
+    st.title("History of India GraphRAG Chatbot")
     st.write(
-        "Ask questions about the Roman Empire. "
+        "Ask questions about the History of India. "
         "Answers are generated using both Neo4j graph data and RAG over documents."
     )
 
@@ -345,7 +345,7 @@ def main() -> None:
                     )
                     st.rerun()
 
-    user_input = st.chat_input("Type your question about the Roman Empire...")
+    user_input = st.chat_input("Type your question about the History of India...")
     if user_input:
         st.session_state.messages.append({"role": "user", "content": user_input})
         with st.chat_message("user"):
