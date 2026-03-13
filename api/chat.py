@@ -188,7 +188,7 @@ def _build_chat_history(messages: List[Dict[str, Any]]) -> List[Tuple[str, str]]
 def _get_suggested_followups(question: str, answer: str) -> List[str]:
     try:
         suggestions_prompt = ChatPromptTemplate.from_template(
-            "You are helping a user explore the Roman Empire.\n"
+            "You are helping a user explore the History of India.\n"
             "Given the last question and answer, suggest 3 concise follow-up questions "
             "the user might reasonably ask next.\n\n"
             "Last question: {question}\n"
